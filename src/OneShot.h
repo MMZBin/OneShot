@@ -60,7 +60,7 @@ private:
     uint32_t startTime_;     //タイマーが開始した時間
 
     State state_;            //タイマーの状態
-    bool isOccurred_;        //タイマーが作動してから次にupdate()メソッドが呼ばれるかキャンセルされるまでtrueになる
+    bool hasOccurred_;        //タイマーが作動してから次にupdate()メソッドが呼ばれるかキャンセルされるまでtrueになる
 
     const TimeFunc now_;     //時間の取得用の関数ポインタ
 };

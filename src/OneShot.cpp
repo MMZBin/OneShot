@@ -2,7 +2,7 @@
 #include "OneShot.h"
 
 OneShot::OneShot(Resolution res)
-    : func_(nullptr), interval_(0), remainingTime_(0), endTime_(0), startTime_(0), state_(State::STOPPED), isOccurred_(false), now_((res == Resolution::MILLIS) ? millis : micros) {  }
+    : func_(nullptr), interval_(0), remainingTime_(0), endTime_(0), startTime_(0), state_(State::STOPPED), hasOccurred_(false), now_((res == Resolution::MILLIS) ? millis : micros) {  }
 
 void OneShot::registerCallback(CallbackFunc func) {
     if (state_ != State::STOPPED) { return; }
@@ -19,7 +19,7 @@ void OneShot::removeCallback() { registerCallback(nullptr); }
 
 OneShot::State OneShot::getState() const { return state_; }
 
-bool OneShot::hasOccurred() const { return isOccurred_; }
+bool OneShot::hasOccurred() const { return hasOccurred_; }
 
 uint32_t OneShot::getInterval() const { return interval_; }
 
@@ -50,7 +50,7 @@ void OneShot::start() {
 
     startTime_ = now_();
     endTime_ = startTime_ + interval_;
-    isOccurred_ = false;
+    hasOccurred_ = false;
 }
 
 void OneShot::pause() {
@@ -67,7 +67,7 @@ void OneShot::resume() {
 }
 
 void OneShot::cancel() {
-    isOccurred_ = false;
+    hasOccurred_ = false;
 
     startTime_ = 0;
     endTime_ = 0;
@@ -77,11 +77,11 @@ void OneShot::cancel() {
 }
 
 void OneShot::update() {
-    isOccurred_ = false;
+    hasOccurred_ = false;
     if (state_ != State::RUNNING) { return; }
 
     if (now_() >= endTime_) {
-        isOccurred_ = true;
+        hasOccurred_ = true;
         if (func_ != nullptr) { func_(); }
         state_ = State::STOPPED;
     }

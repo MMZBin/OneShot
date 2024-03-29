@@ -29,6 +29,17 @@ void OneShot::setInterval(uint32_t interval) {
     interval_ = interval;
 }
 
+uint32_t OneShot::getStartTime() const { return startTime_; }
+
+uint32_t OneShot::getEndTime() const { return endTime_; }
+
+uint32_t OneShot::getRemainingTime() const {
+    if (state_ == State::PAUSED) { return remainingTime_; }
+    return interval_ - (now_() - startTime_);
+}
+
+uint32_t OneShot::getElapsedTime() const { return (endTime_ - startTime_) - getRemainingTime(); }
+
 void OneShot::start() {
     if ((state_ != State::STOPPED) || (interval_ == 0)) { return; }
     state_ = State::RUNNING;
@@ -40,9 +51,8 @@ void OneShot::start() {
 
 void OneShot::pause() {
     if (state_ != State::RUNNING) { return; }
+    remainingTime_ = getRemainingTime();
     state_ = State::PAUSED;
-
-    remainingTime_ = interval_ - (now_() - startTime_);
 }
 
 void OneShot::resume() {
@@ -54,6 +64,11 @@ void OneShot::resume() {
 
 void OneShot::cancel() {
     isOccurred_ = false;
+
+    startTime_ = 0;
+    endTime_ = 0;
+    remainingTime_ = 0;
+
     state_ = State::STOPPED;
 }
 

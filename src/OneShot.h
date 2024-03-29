@@ -32,6 +32,14 @@ public:
 
     void setInterval(uint32_t interval);
 
+    uint32_t getStartTime() const;
+
+    uint32_t getEndTime() const;
+
+    uint32_t getRemainingTime() const;
+
+    uint32_t getElapsedTime() const;
+
     void start();
 
     void pause();

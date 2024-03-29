@@ -22,6 +22,8 @@ public:
 
     void registerCallback(CallbackFunc func, uint32_t interval);
 
+    void removeCallback();
+
     OneShot::State getState() const;
 
     bool isOccurred() const;

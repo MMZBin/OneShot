@@ -15,6 +15,8 @@ void OneShot::registerCallback(CallbackFunc func, uint32_t interval) {
     setInterval(interval);
 }
 
+void OneShot::removeCallback() { registerCallback(nullptr); }
+
 OneShot::State OneShot::getState() const { return state_; }
 
 bool OneShot::isOccurred() const { return isOccurred_; }

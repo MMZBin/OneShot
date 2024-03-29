@@ -4,9 +4,11 @@ This library uses English that has been machine-translated from Japanese.
 
 一回限りのワンショットイベントを生成するライブラリです。
 イベントは再トリガー(`start()`)することで何度でも利用可能です。
+コールバック関数は必ずしも登録する必要はありません。
 
 This is a library for generating one-shot events, which occur only once.
 The event can be reused multiple times by triggering it again (`start()`).
+It's not always necessary to register a callback function.
 
 ## 機能 Functions
 

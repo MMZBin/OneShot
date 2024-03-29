@@ -6,7 +6,7 @@ This library uses English that has been machine-translated from Japanese.
 イベントは再トリガー(`start()`)することで何度でも利用可能です。
 
 This is a library for generating one-shot events, which occur only once.
-The event can be reused multiple times by retriggering it.
+The event can be reused multiple times by triggering it again (`start()`).
 
 ## 機能 Functions
 

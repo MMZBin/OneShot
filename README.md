@@ -36,6 +36,9 @@ This is a library for generating one-shot events, which occur only once.
       - 登録するコールバック関数 Callback function to register.
     -interval
       - イベントが発生するまでの間隔(ミリ秒もしくはマイクロ秒) Time until the event occurs (in milliseconds or microseconds).
+     
+#### void removeCallback()
+  - コールバック関数を削除します。 Delete the callback function.
 
 #### OneShot::State getState()
   - 現在の状態をState列挙型で返します。 Returns the current state as State enumeration.

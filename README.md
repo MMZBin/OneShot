@@ -47,7 +47,7 @@ It's not always necessary to register a callback function.
 #### OneShot::State getState()
   - 現在の状態をState列挙型で返します。 Returns the current state as State enumeration.
 
-#### bool isOccurred()
+#### bool hasOccurred()
   - イベントが発生したと判定されてから次にupdate()メソッドが実行されるまでtrueになります。 Returns true if an event has occurred until the next update() method is executed.
 
 #### uint32_t getInterval()

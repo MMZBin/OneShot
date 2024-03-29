@@ -23,7 +23,7 @@ void loop() {
   }
   
   //From the time it is determined that time has elapsed until the next execution of the update() method, it returns true
-  if (oneShot.isOccurred()) {
+  if (oneShot.hasOccurred()) {
     digitalWrite(LED, ledState);
     ledState = !ledState; //Toggle the LED state
   }

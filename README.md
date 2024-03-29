@@ -3,8 +3,10 @@ This library uses English that has been machine-translated from Japanese.
 # OneShot
 
 一回限りのワンショットイベントを生成するライブラリです。
+イベントは再トリガー(`start()`)することで何度でも利用可能です。
 
 This is a library for generating one-shot events, which occur only once.
+The event can be reused multiple times by retriggering it.
 
 ## 機能 Functions
 
@@ -56,20 +58,21 @@ This is a library for generating one-shot events, which occur only once.
       - イベントが発生するまでの時間(ミリ秒もしくはマイクロ秒) Time until the event occurs (in milliseconds or microseconds).
      
 #### uint32_t getStartTime()
-  - タイマーが開始された時間を返します。
-  - 停止中(State::STOPPED)の間は0になります。
+  - タイマーが開始された時間を返します。 Returns the time when the timer was started.
+  - 停止中(State::STOPPED)の間は0になります。 During the stopped state (State::STOPPED), it will return 0.
 
 #### uint32_t getEndTime()
-  - イベントが発生する時間を返します。
-  - 停止中(State::STOPPED)の間は0になります。
+  - イベントが発生する時間を返します。 Returns the time when the event occurs.
+  - 停止中(State::STOPPED)の間は0になります。 During the stopped state (State::STOPPED), it will return 0.
 
 #### uint32_t getRemainingTime()
-  - タイマーが動作するまでの残り時間を返します。
-  - 停止中(State::STOPPED)の間は0になります。
+  - タイマーが動作するまでの残り時間を返します。 Returns the remaining time until the timer operates.
+  - 停止中(State::STOPPED)の間は0になります。 During the stopped state (State::STOPPED), it will return 0.
 
 #### getElapsedTime()
   - タイマーが開始されてからの経過時間を返します。
-  - 停止中(State::STOPPED)の間は0になります。
+  - 停止中(State::STOPPED)の間は0になります。 During the stopped state (State::STOPPED), it will return 0.
+
 
 #### void start()
   - タイマーを開始します。 Starts the timer.

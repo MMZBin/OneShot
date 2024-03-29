@@ -26,7 +26,7 @@ public:
 
     OneShot::State getState() const;
 
-    bool isOccurred() const;
+    bool hasOccurred() const;
 
     uint32_t getInterval() const;
 

@@ -19,7 +19,7 @@ void OneShot::removeCallback() { registerCallback(nullptr); }
 
 OneShot::State OneShot::getState() const { return state_; }
 
-bool OneShot::isOccurred() const { return isOccurred_; }
+bool OneShot::hasOccurred() const { return isOccurred_; }
 
 uint32_t OneShot::getInterval() const { return interval_; }
 
@@ -81,8 +81,8 @@ void OneShot::update() {
     if (state_ != State::RUNNING) { return; }
 
     if (now_() >= endTime_) {
+        isOccurred_ = true;
         if (func_ != nullptr) { func_(); }
         state_ = State::STOPPED;
-        isOccurred_ = true;
     }
 }

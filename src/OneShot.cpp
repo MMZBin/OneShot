@@ -1,4 +1,4 @@
-#include <Arduino.h>
+#include "Arduino.h"
 #include "OneShot.h"
 
 OneShot::OneShot(Resolution res)
@@ -34,11 +34,15 @@ uint32_t OneShot::getStartTime() const { return startTime_; }
 uint32_t OneShot::getEndTime() const { return endTime_; }
 
 uint32_t OneShot::getRemainingTime() const {
+    if (state_ == State::STOPPED) { return 0; }
     if (state_ == State::PAUSED) { return remainingTime_; }
     return interval_ - (now_() - startTime_);
 }
 
-uint32_t OneShot::getElapsedTime() const { return (endTime_ - startTime_) - getRemainingTime(); }
+uint32_t OneShot::getElapsedTime() const {
+    if (state_ == State::STOPPED) { return 0; }
+    return interval_ - getRemainingTime();
+}
 
 void OneShot::start() {
     if ((state_ != State::STOPPED) || (interval_ == 0)) { return; }

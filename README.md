@@ -54,6 +54,22 @@ This is a library for generating one-shot events, which occur only once.
   - タイマーが動作している間は無効になります。 It becomes invalid while the timer is running.
     - interval
       - イベントが発生するまでの時間(ミリ秒もしくはマイクロ秒) Time until the event occurs (in milliseconds or microseconds).
+     
+#### uint32_t getStartTime()
+  - タイマーが開始された時間を返します。
+  - 停止中(State::STOPPED)の間は0になります。
+
+#### uint32_t getEndTime()
+  - イベントが発生する時間を返します。
+  - 停止中(State::STOPPED)の間は0になります。
+
+#### uint32_t getRemainingTime()
+  - タイマーが動作するまでの残り時間を返します。
+  - 停止中(State::STOPPED)の間は0になります。
+
+#### getElapsedTime()
+  - タイマーが開始されてからの経過時間を返します。
+  - 停止中(State::STOPPED)の間は0になります。
 
 #### void start()
   - タイマーを開始します。 Starts the timer.

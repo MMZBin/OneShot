@@ -26,7 +26,7 @@
 #include "OneShot.h"
 
 OneShot::OneShot(Resolution res)
-    : func_(nullptr), interval_(0), remainingTime_(0), endTime_(0), startTime_(0), state_(State::STOPPED), hasOccurred_(false), now_((res == Resolution::MILLIS) ? millis : micros) {  }
+    : func_(nullptr), interval_(0), remainingTime_(0), endTime_(0), startTime_(0), state_(State::STOPPED), resolution_(res), hasOccurred_(false), now_((res == Resolution::MILLIS) ? millis : micros) {  }
 
 void OneShot::registerCallback(CallbackFunc func) {
     if (state_ != State::STOPPED) { return; }
@@ -40,6 +40,11 @@ void OneShot::registerCallback(CallbackFunc func, uint32_t interval) {
 }
 
 void OneShot::removeCallback() { registerCallback(nullptr); }
+
+OneShot::Resolution OneShot::getResolution() const { return resolution_; }
+
+OneShot::TimeFunc OneShot::getTimeFunc() const { return now_; }
+uint32_t OneShot::now() const { return now_(); }
 
 OneShot::State OneShot::getState() const { return state_; }
 
@@ -60,7 +65,7 @@ uint32_t OneShot::getEndTime() const { return endTime_; }
 uint32_t OneShot::getRemainingTime() const {
     if (state_ == State::STOPPED) { return 0; }
     if (state_ == State::PAUSED) { return remainingTime_; }
-    return interval_ - (now_() - startTime_);
+    return interval_ - (now() - startTime_);
 }
 
 uint32_t OneShot::getElapsedTime() const {
@@ -72,7 +77,7 @@ void OneShot::start() {
     if ((state_ != State::STOPPED) || (interval_ == 0)) { return; }
     state_ = State::RUNNING;
 
-    startTime_ = now_();
+    startTime_ = now();
     endTime_ = startTime_ + interval_;
     hasOccurred_ = false;
 }
@@ -87,7 +92,7 @@ void OneShot::resume() {
     if (state_ != State::PAUSED) { return; }
     state_ = State::RUNNING;
 
-    endTime_ = now_() + remainingTime_; //終了時間を残り時間を元に再計算する
+    endTime_ = now() + remainingTime_; //終了時間を残り時間を元に再計算する
 }
 
 void OneShot::cancel() {
@@ -104,9 +109,9 @@ void OneShot::update() {
     hasOccurred_ = false;
     if (state_ != State::RUNNING) { return; }
 
-    if (now_() >= endTime_) {
-        hasOccurred_ = true;
+    if (now() >= endTime_) {
         if (func_ != nullptr) { func_(); }
         state_ = State::STOPPED;
+        hasOccurred_ = true;
     }
 }

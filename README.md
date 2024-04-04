@@ -45,16 +45,16 @@ It's not always necessary to register a callback function.
   - コールバック関数を削除します。 Delete the callback function.
 
 #### OneShot::Resolution getResolution()
-  - タイマーの分解能を返します。
+  - タイマーの分解能を返します。 This function returns the resolution of the timer.
 
 #### OneShot::TimeFunc getTimeFunc()
-  - タイマーの時間測定に使われている関数ポインタを返します。
-    - Resolution::MILLISの場合：millis関数
-    - Resolution::MICROSの場合：micros関数
+  - タイマーの時間測定に使われている関数ポインタを返します。 This function returns a function pointer used for timing measurements.
+    - Resolution::MILLISの場合：millis関数 For Resolution::MILLIS : millis function
+    - Resolution::MICROSの場合：micros関数 For Resolution::MICROS : micros function
    
 #### uint32_t now()
-  - 現在の時間を返します。
-    - 時間の分解能はタイマーの分解能に依存します。
+  - 現在の時間を返します。 This function returns the current time.
+    - 時間の分解能はタイマーの分解能に依存します。 The resolution of this function depends on the timer's resolution.
 
 #### OneShot::State getState()
   - 現在の状態をState列挙型で返します。 Returns the current state as State enumeration.

@@ -71,7 +71,7 @@ public:
     void resume();
     void cancel();
 
-    void update(); //loop関数内でこれを呼び出してください
+    bool update(); //loop関数内でこれを呼び出してください
 
 private:
     CallbackFunc func_;      //コールバック関数

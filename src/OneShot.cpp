@@ -105,13 +105,15 @@ void OneShot::cancel() {
     state_ = State::STOPPED;
 }
 
-void OneShot::update() {
+bool OneShot::update() {
     hasOccurred_ = false;
-    if (state_ != State::RUNNING) { return; }
+    if (state_ != State::RUNNING) { return false; }
 
     if (now() >= endTime_) {
         if (func_ != nullptr) { func_(); }
         state_ = State::STOPPED;
         hasOccurred_ = true;
     }
+
+    return hasOccurred_;
 }

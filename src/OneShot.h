@@ -41,11 +41,11 @@ public:
         MICROS
     };
 
-    OneShot(Resolution res=Resolution::MILLIS);
+    OneShot(const Resolution res=Resolution::MILLIS);
 
-    void registerCallback(CallbackFunc func);
+    void registerCallback(const CallbackFunc func);
 
-    void registerCallback(CallbackFunc func, uint32_t interval);
+    void registerCallback(const CallbackFunc func, const uint32_t interval);
 
     void removeCallback();
 
@@ -59,7 +59,7 @@ public:
     bool hasOccurred() const;
 
     uint32_t getInterval() const;
-    void setInterval(uint32_t interval);
+    void setInterval(const uint32_t interval);
 
     uint32_t getStartTime() const;
     uint32_t getEndTime() const;
@@ -67,6 +67,7 @@ public:
     uint32_t getElapsedTime() const;
 
     void start();
+    void start(const uint8_t interval);
     void pause();
     void resume();
     void cancel();

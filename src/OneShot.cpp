@@ -25,16 +25,16 @@
 #include <Arduino.h>
 #include "OneShot.h"
 
-OneShot::OneShot(Resolution res)
+OneShot::OneShot(const Resolution res)
     : func_(nullptr), interval_(0), remainingTime_(0), endTime_(0), startTime_(0), state_(State::STOPPED), resolution_(res), hasOccurred_(false), now_((res == Resolution::MILLIS) ? millis : micros) {  }
 
-void OneShot::registerCallback(CallbackFunc func) {
+void OneShot::registerCallback(const CallbackFunc func) {
     if (state_ != State::STOPPED) { return; }
 
     func_ = func;
 }
 
-void OneShot::registerCallback(CallbackFunc func, uint32_t interval) {
+void OneShot::registerCallback(const CallbackFunc func, const uint32_t interval) {
     registerCallback(func);
     setInterval(interval);
 }
@@ -52,7 +52,7 @@ bool OneShot::hasOccurred() const { return hasOccurred_; }
 
 uint32_t OneShot::getInterval() const { return interval_; }
 
-void OneShot::setInterval(uint32_t interval) {
+void OneShot::setInterval(const uint32_t interval) {
     if (state_ != State::STOPPED) { return; }
 
     interval_ = interval;
@@ -80,6 +80,11 @@ void OneShot::start() {
     startTime_ = now();
     endTime_ = startTime_ + interval_;
     hasOccurred_ = false;
+}
+
+void OneShot::start(const uint8_t interval) {
+    setInterval(interval);
+    start();
 }
 
 void OneShot::pause() {

@@ -92,6 +92,9 @@ It's not always necessary to register a callback function.
   - タイマーを開始します。 Starts the timer.
   - すでに動作している間に実行された場合、なにもしません。 Does nothing if already running.
 
+#### void start(uint32_t interval)
+  - インターバルを指定すると同時にタイマーを開始します。 Start the timer simultaneously with specifying the interval.
+
 #### void pause()
   - タイマーを一時停止します。 Pauses the timer.
 

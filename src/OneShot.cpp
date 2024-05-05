@@ -82,7 +82,7 @@ void OneShot::start() {
     hasOccurred_ = false;
 }
 
-void OneShot::start(const uint8_t interval) {
+void OneShot::start(const uint32_t interval) {
     setInterval(interval);
     start();
 }

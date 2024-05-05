@@ -67,7 +67,7 @@ public:
     uint32_t getElapsedTime() const;
 
     void start();
-    void start(const uint8_t interval);
+    void start(const uint32_t interval);
     void pause();
     void resume();
     void cancel();

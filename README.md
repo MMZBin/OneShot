@@ -101,10 +101,11 @@ It's not always necessary to register a callback function.
 #### void cancel()
   - タイマーをキャンセルします。 Cancels the timer.
 
-#### void update()
+#### bool update()
   - イベントの状態を更新します。 Updates the state of the event.
   - タイマーの精度を高めるためには、このメソッドをできるだけ早い周期で呼び出す必要があります。 To improve the accuracy of the timer, this method needs to be called at the earliest possible cycle.
   - このメソッドが呼び出される箇所が一箇所である必要はありません。 It is not necessary for this method to be called at a single location.
+  - イベントが発生したらtrue、しなければfalseを返します。(hasOccurred()メソッドと同じです。) When the event occurs, it returns true; otherwise, it returns false (same as the hasOccurred() method).
 
 
 ## 使用例 Usage Example

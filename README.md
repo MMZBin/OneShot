@@ -1,7 +1,9 @@
 This library uses English that has been machine-translated from Japanese.
 
-** 警告：v0.4.0より破壊的変更が加えられました。時間計測関数の登録方法が変更され、Resolution列挙型が削除されました。 **
-Warning: Destructive changes have been made since v0.4.0. The method of registering timing measurement functions has been altered, and the Resolution enumeration type has been removed.
+**警告：v0.4.0より破壊的変更が加えられました。時間計測関数の登録方法が変更され、Resolution列挙型が削除されました。**
+
+
+**Warning: Destructive changes have been made since v0.4.0. The method of registering timing measurement functions has been altered, and the Resolution enumeration type has been removed.**
 
 # OneShot
 

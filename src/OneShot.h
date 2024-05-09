@@ -36,20 +36,12 @@ public:
         PAUSED
     };
 
-    enum class Resolution : uint8_t {
-        MILLIS,
-        MICROS
-    };
-
-    OneShot(const Resolution res=Resolution::MILLIS);
+    OneShot(const TimeFunc timeFunc);
 
     void registerCallback(const CallbackFunc func);
-
     void registerCallback(const CallbackFunc func, const uint32_t interval);
 
     void removeCallback();
-
-    OneShot::Resolution getResolution() const;
 
     OneShot::TimeFunc getTimeFunc() const;
     uint32_t now() const;
@@ -76,13 +68,9 @@ public:
 
 private:
     CallbackFunc func_;      //コールバック関数
-    uint32_t interval_;      //タイマーが作動するまでの時間
-    uint32_t remainingTime_; //タイマーの残り時間(一時停止したとき)
-    uint32_t endTime_;       //タイマーが作動する時間
-    uint32_t startTime_;     //タイマーが開始した時間
+    uint32_t interval_, remainingTime_, endTime_, startTime_;
 
     State state_;            //タイマーの状態
-    Resolution resolution_;  //時間の分解能
 
     bool hasOccurred_;       //タイマーが作動してから次にupdate()メソッドが呼ばれるかキャンセルされるまでtrueになる
 

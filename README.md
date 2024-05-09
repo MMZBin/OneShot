@@ -1,5 +1,8 @@
 This library uses English that has been machine-translated from Japanese.
 
+** 警告：v0.4.0より破壊的変更が加えられました。時間計測関数の登録方法が変更され、Resolution列挙型が削除されました。 **
+Warning: Destructive changes have been made since v0.4.0. The method of registering timing measurement functions has been altered, and the Resolution enumeration type has been removed.
+
 # OneShot
 
 一回限りのワンショットイベントを生成するライブラリです。
@@ -18,16 +21,15 @@ It's not always necessary to register a callback function.
   - RUNNING
   - PAUSED
 
-#### enum class Resolution
-- タイマーの分解能を設定します。 Sets the resolution of the timer.
-  - MILLIS
-  - MICROS
-
-#### OneShot(OneShot::Resolution res)
+#### OneShot(TimeFunc timeFunc)
   - OneShotオブジェクトを生成します。 Generates a OneShot object.
-    - res
+    - timeFunc
       - タイマーの分解能を設定します。 Sets the resolution of the timer.
-      - デフォルトではMILLISです。 Default is MILLIS.
+      - ミリ秒単位の場合はmillis、マイクロ秒単位の場合はmicrosを使います。 For millisecond units, use "millis"; for microsecond units, use "micros".
+      - あなた独自の計測用関数を使用することもできます。 You can also use your own custom measurement functions.
+      - デフォルトではmillisです。 Default is "millis".
+     
+  - 例:`OneShot oneShot(millis);`
 
 #### void registerCallback(CallbackFunc func)
   - タイマーイベントが発生した際に呼び出されるコールバック関数を登録します。 Registers a callback function to be called when the timer event occurs.
@@ -44,13 +46,8 @@ It's not always necessary to register a callback function.
 #### void removeCallback()
   - コールバック関数を削除します。 Delete the callback function.
 
-#### OneShot::Resolution getResolution()
-  - タイマーの分解能を返します。 This function returns the resolution of the timer.
-
 #### OneShot::TimeFunc getTimeFunc()
   - タイマーの時間測定に使われている関数ポインタを返します。 This function returns a function pointer used for timing measurements.
-    - Resolution::MILLISの場合：millis関数 For Resolution::MILLIS : millis function
-    - Resolution::MICROSの場合：micros関数 For Resolution::MICROS : micros function
    
 #### uint32_t now()
   - 現在の時間を返します。 This function returns the current time.
@@ -115,7 +112,7 @@ It's not always necessary to register a callback function.
 ```
 #include <OneShot.h>
 
-OneShot oneShot(OneShot::Resolution::MILLIS); //Generate a OneShot object (you can omit the argument if the resolution is in milliseconds).
+OneShot oneShot(millis); //Generate a OneShot object (you can omit the argument if the resolution is in milliseconds).
 
 const uint8_t LED = 13; //LED pin
 const uint8_t SW1 = 2;  //Pin to connect the switch

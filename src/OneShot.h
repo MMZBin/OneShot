@@ -36,7 +36,7 @@ public:
         PAUSED
     };
 
-    OneShot(const TimeFunc timeFunc);
+    OneShot(const TimeFunc timeFunc=millis);
 
     void registerCallback(const CallbackFunc func);
     void registerCallback(const CallbackFunc func, const uint32_t interval);

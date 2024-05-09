@@ -1,7 +1,7 @@
 #include <OneShot.h>
 
-                                              //OneShotオブジェクトを生成(引数は省略でき、省略した場合はミリ秒単位になります。)
-OneShot oneShot(OneShot::Resolution::MILLIS); //Generate a OneShot object (you can omit the argument if the resolution is in milliseconds).
+                         //OneShotオブジェクトを生成(引数は省略でき、省略した場合はミリ秒単位になります。)
+OneShot oneShot(millis); //Generate a OneShot object (you can omit the argument if the resolution is in milliseconds).
 
 const uint8_t LED = 13; //LED pin LEDピン
 const uint8_t SW1 = 2;  //Pin to connect the switch スイッチ

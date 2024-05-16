@@ -63,7 +63,7 @@ uint32_t OneShot::getEndTime() const { return endTime_; }
 uint32_t OneShot::getRemainingTime() const {
     if (state_ == State::STOPPED) { return 0; }
     if (state_ == State::PAUSED) { return remainingTime_; }
-    return interval_ - (now() - startTime_);
+    return interval_ - (now_() - startTime_);
 }
 
 uint32_t OneShot::getElapsedTime() const {
@@ -75,7 +75,7 @@ void OneShot::start() {
     if ((state_ != State::STOPPED) || (interval_ == 0)) { return; }
     state_ = State::RUNNING;
 
-    startTime_ = now();
+    startTime_ = now_();
     endTime_ = startTime_ + interval_;
     hasOccurred_ = false;
 }
@@ -95,7 +95,7 @@ void OneShot::resume() {
     if (state_ != State::PAUSED) { return; }
     state_ = State::RUNNING;
 
-    endTime_ = now() + remainingTime_; //終了時間を残り時間を元に再計算する
+    endTime_ = now_() + remainingTime_; //終了時間を残り時間を元に再計算する
 }
 
 void OneShot::cancel() {
@@ -112,7 +112,7 @@ bool OneShot::update() {
     hasOccurred_ = false;
     if (state_ != State::RUNNING) { return false; }
 
-    if (now() >= endTime_) {
+    if (now_() >= endTime_) {
         if (func_ != nullptr) { func_(); }
         state_ = State::STOPPED;
         hasOccurred_ = true;
